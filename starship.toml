@@ -1,0 +1,14 @@
+# Get editor completions based on the config schema
+#"$schema" = 'https://starship.rs/config-schema.json'
+
+# Theming and shared configs
+# https://github.com/starship/starship/discussions/1107
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Enabled in tmux, disable in starship
+[kubernetes]
+disabled = true
+[docker_context]
+disabled = true  # if you add docker to tmux status bar
