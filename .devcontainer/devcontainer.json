@@ -3,8 +3,8 @@
 {
 	"name": "Devcontainer Devcontainer",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "ghcr.io/jamesbrayton/devcontainer:base",
-
+	"image": "ghcr.io/fish-slapped-mayhem/devcontainer:base",
+	
 	// Always pull the latest image from the registry before starting the container
 	"initializeCommand": "docker pull ghcr.io/jamesbrayton/devcontainer:base",
 
