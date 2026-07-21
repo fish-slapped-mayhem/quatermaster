@@ -6,7 +6,13 @@
 	"image": "ghcr.io/fish-slapped-mayhem/devcontainer:base",
 	
 	// Always pull the latest image from the registry before starting the container
-	"initializeCommand": "docker pull ghcr.io/jamesbrayton/devcontainer:base",
+	"initializeCommand": "docker pull ghcr.io/fish-slapped-mayhem/devcontainer:base",
+
+	// Materialize SSH private keys from SSH_PRIVATE_KEY_* env vars (delivered
+	// via the --env-file runArg below). Baked into the image; no-ops when the
+	// vars are absent, in which case host SSH agent forwarding is the fallback.
+	// (Guarded so containers built from images predating ssh-runtime-keys still start.)
+	"postCreateCommand": "bash -lc 'command -v ssh-runtime-keys > /dev/null && ssh-runtime-keys || true'",
 
 	// Use a named volume instead of your host folder
 	"workspaceFolder": "/workspace",
