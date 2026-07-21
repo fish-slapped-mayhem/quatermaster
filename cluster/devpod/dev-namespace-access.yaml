@@ -1,0 +1,32 @@
+# Shared `dev` namespace: the default deploy target for development work that
+# doesn't yet have its own <app>-dev namespace.
+#
+# The RoleBinding grants the DevPod workspace ServiceAccount the built-in
+# `edit` ClusterRole *within this namespace only* — create/update/delete of
+# workloads, services, configmaps, secrets, but no RBAC changes and nothing
+# cluster-wide. A leaked workspace token is worth exactly this namespace.
+#
+# Per-application namespaces get an identical RoleBinding from their own repo;
+# the template lives in docs/template-repo-requirements.md.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev
+  labels:
+    app.kubernetes.io/managed-by: quartermaster
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: devpod-workspace-edit
+  namespace: dev
+  labels:
+    app.kubernetes.io/managed-by: quartermaster
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: edit
+subjects:
+  - kind: ServiceAccount
+    name: devpod-workspace
+    namespace: devpod

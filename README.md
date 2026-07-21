@@ -18,6 +18,8 @@ The Quartermaster's Office maintains, builds, and issues the development environ
 | `scripts/apply-home.sh` | Applies `home/` onto `$HOME` with correct ownership and permissions. |
 | `scripts/ssh-runtime-keys.sh` | Baked into the image as `ssh-runtime-keys`. Materializes SSH keys from `SSH_PRIVATE_KEY_*` variables at container start. |
 | `machine/` | Host-side configuration the image cannot carry: VS Code settings and DevPod provider inventory, synced with `machine/sync.sh push` / `pull`. |
+| `cluster/devpod/` | Applied once per cluster (`kubectl apply -f cluster/devpod/`): the `devpod-workspace` ServiceAccount and namespace-scoped RBAC that let in-cluster workspaces deploy to dev namespaces without any kubeconfig being copied anywhere. |
+| `docs/` | Paperwork, notably [template-repo-requirements.md](docs/template-repo-requirements.md): what every new application repository must carry itself because the shared image cannot carry it. |
 
 The repository root is reserved for the paperwork of the repository itself. Files destined for a home directory do not loiter there.
 

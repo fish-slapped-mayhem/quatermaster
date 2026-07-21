@@ -32,7 +32,9 @@ contexts:
           PVC_ACCESS_MODE: {}
           PVC_ANNOTATIONS: {}
           RESOURCES: {}
-          SERVICE_ACCOUNT: {}
+          SERVICE_ACCOUNT:
+            userProvided: true
+            value: devpod-workspace
           STORAGE_CLASS: {}
           STRICT_SECURITY:
             value: "false"

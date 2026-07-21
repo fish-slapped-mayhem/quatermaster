@@ -1,0 +1,28 @@
+# Identity for DevPod workspace pods running in the cluster.
+#
+# Workspaces authenticate to the cluster with this ServiceAccount instead of a
+# copied kubeconfig: kubectl automatically uses the pod's mounted ServiceAccount
+# token when no kubeconfig is present, so no secrets are ever distributed to,
+# baked into, or copied onto a development container.
+#
+# What this SA can do is defined per-namespace by RoleBindings:
+#   - dev-namespace-access.yaml here grants `edit` in the shared `dev` namespace
+#   - each application repo grants `edit` in its own <app>-dev namespace
+#     (see docs/template-repo-requirements.md)
+# It deliberately has no cluster-wide permissions.
+#
+# Apply once per cluster:  kubectl apply -f cluster/devpod/
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: devpod
+  labels:
+    app.kubernetes.io/managed-by: quartermaster
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: devpod-workspace
+  namespace: devpod
+  labels:
+    app.kubernetes.io/managed-by: quartermaster
